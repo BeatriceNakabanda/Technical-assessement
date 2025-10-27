@@ -11,37 +11,18 @@
 </head>
 <body>
     <div id="root"></div>
-
     <script type="text/babel">
         const { useState, useEffect } = React;
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJl3ZABFBNpnuTgtBlwlwnjkYjKvCvL4GGLzKnTixbrFELgDNNx0ElcRpEaqgQo8znvQ/exec';
 
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfSWigML0wNDOleluNenCHhwRJgQvcatf5Fo7vzjOrh6yHTTSfy93CBEEq-A1MHy3fJA/exec';
-
-        // Lucide Icons as React components
-        const Clock = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        );
-        const AlertTriangle = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        );
-        const CheckCircle = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        );
-        const XCircle = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-        );
-        const Download = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        );
-        const ChevronLeft = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        );
-        const ChevronRight = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        );
-        const Upload = () => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        );
+        const Clock = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        const AlertTriangle = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        const CheckCircle = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>;
+        const XCircle = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>;
+        const Download = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>;
+        const ChevronLeft = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>;
+        const ChevronRight = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>;
+        const Upload = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>;
 
         function AssessmentPlatform() {
             const [started, setStarted] = useState(false);
@@ -56,133 +37,89 @@
             const [submitStatus, setSubmitStatus] = useState(null);
 
             const sections = [
-                {
-                    name: "HTML Fundamentals",
-                    totalPoints: 50,
-                    passPoints: 35,
-                    hasObjective: true,
-                    questions: [
-                        { id: "html_1", type: "multiple", points: 2, question: "What is the correct HTML5 doctype declaration?", options: ["<!DOCTYPE html5>", "<!DOCTYPE HTML>", "<!DOCTYPE html>", "<DOCTYPE html>"], correct: 2 },
-                        { id: "html_2", type: "multiple", points: 2, question: "Which HTML element is used for the largest heading?", options: ["<heading>", "<h6>", "<h1>", "<head>"], correct: 2 },
-                        { id: "html_3", type: "multiple", points: 2, question: "What does the <meta charset='UTF-8'> tag do?", options: ["Sets page language", "Defines character encoding", "Sets viewport", "Links stylesheet"], correct: 1 },
-                        { id: "html_4", type: "multiple", points: 2, question: "Which attribute is required for all <img> tags for accessibility?", options: ["src", "alt", "title", "Both a and b"], correct: 3 },
-                        { id: "html_5", type: "multiple", points: 2, question: "What is semantic HTML?", options: ["HTML with inline styles", "HTML that describes content meaning", "HTML with JavaScript", "Compressed HTML"], correct: 1 },
-                        { id: "html_code_1", type: "code", points: 20, question: "Complete this semantic HTML5 blog post structure. Fill in the missing parts:", baseCode: `<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <title>My Blog Post</title>\n</head>\n<body>\n    <!-- Add header with navigation here -->\n    \n    \n    <main>\n        <!-- Add article with title, author, date, content, and image here -->\n        \n        \n    </main>\n    \n    <!-- Add sidebar with related posts here -->\n    \n    \n    <!-- Add footer with copyright here -->\n    \n    \n</body>\n</html>` },
-                        { id: "html_code_2", type: "code", points: 20, question: "Complete this accessible contact form. Add proper labels and validation:", baseCode: `<form action="/submit" method="POST">\n    <fieldset>\n        <legend>Contact Information</legend>\n        \n        <!-- Add name input (required) with label -->\n        \n        \n        <!-- Add email input (required, type=email) with label -->\n        \n        \n        <!-- Add phone input (optional) with label -->\n        \n        \n        <!-- Add message textarea (required, minlength=10) with label -->\n        \n        \n        <button type="submit">Send Message</button>\n    </fieldset>\n</form>` }
-                    ]
-                },
-                {
-                    name: "CSS & Styling",
-                    totalPoints: 60,
-                    passPoints: 42,
-                    hasObjective: true,
-                    questions: [
-                        { id: "css_1", type: "multiple", points: 2, question: "What does CSS stand for?", options: ["Cascading Style Sheets", "Creative Style Syntax", "Computer Style Sheets", "Colored Style Sheets"], correct: 0 },
-                        { id: "css_2", type: "multiple", points: 2, question: "Which CSS property is used to change text color?", options: ["text-color", "font-color", "color", "text-style"], correct: 2 },
-                        { id: "css_3", type: "multiple", points: 2, question: "Which CSS selector has the highest specificity?", options: ["Element selector", "Class selector", "ID selector", "Universal selector"], correct: 2 },
-                        { id: "css_4", type: "multiple", points: 2, question: "What is the Box Model order from inside to outside?", options: ["Content, Border, Padding, Margin", "Content, Padding, Border, Margin", "Content, Margin, Padding, Border", "Padding, Content, Border, Margin"], correct: 1 },
-                        { id: "css_5", type: "multiple", points: 2, question: "How do you center a div horizontally with flexbox?", options: ["text-align: center", "justify-content: center", "align-items: center", "center: true"], correct: 1 },
-                        { id: "css_code_1", type: "code", points: 25, question: "Complete this responsive card component. Add the missing CSS properties:", baseCode: `.card {\n    /* Add: width 300px, center with margin, box-shadow */\n    \n    \n    border-radius: 10px;\n    overflow: hidden;\n}\n\n.card-image {\n    /* Add: full width, 200px height, object-fit cover */\n    \n    \n}\n\n.card-content {\n    /* Add: padding 20px */\n    \n}\n\n.card-title {\n    /* Add: font-size 24px, bold, margin-bottom 10px */\n    \n    \n}\n\n.card-description {\n    /* Add: color gray, font-size 16px, line-height 1.5 */\n    \n    \n}\n\n.card-button {\n    /* Add: blue background, white text, padding, rounded corners */\n    \n    \n    border: none;\n    cursor: pointer;\n}\n\n.card-button:hover {\n    /* Add: darker blue on hover */\n    \n}\n\n/* Mobile: below 768px */\n@media (max-width: 768px) {\n    .card {\n        /* Add: width 100%, smaller padding */\n        \n        \n    }\n}` },
-                        { id: "css_code_2", type: "code", points: 25, question: "Complete this responsive navigation bar. Fill in the flexbox properties:", baseCode: `.navbar {\n    /* Add: flex display, space-between, align-items center */\n    \n    \n    padding: 1rem 2rem;\n    background: #333;\n    color: white;\n}\n\n.nav-menu {\n    /* Add: flex display, gap between items */\n    \n    \n    list-style: none;\n}\n\n.nav-item a {\n    color: white;\n    text-decoration: none;\n    /* Add: padding, transition */\n    \n    \n}\n\n.nav-item a:hover {\n    /* Add: color change on hover */\n    \n}\n\n/* Mobile: below 768px */\n@media (max-width: 768px) {\n    .nav-menu {\n        /* Add: vertical direction, full width */\n        \n        \n    }\n}` }
-                    ]
-                },
-                {
-                    name: "UI/UX Principles",
-                    totalPoints: 40,
-                    passPoints: 28,
-                    hasObjective: true,
-                    questions: [
-                        { id: "uiux_1", type: "multiple", points: 2, question: "What does UX stand for?", options: ["User Experience", "User Exploration", "Universal Experience", "User Extension"], correct: 0 },
-                        { id: "uiux_2", type: "multiple", points: 2, question: "What is the primary goal of UI design?", options: ["Make it look pretty", "Make it functional and intuitive", "Add many features", "Use latest trends"], correct: 1 },
-                        { id: "uiux_3", type: "multiple", points: 2, question: "What is a wireframe?", options: ["Final design mockup", "Basic layout sketch showing structure", "Code framework", "Design system"], correct: 1 },
-                        { id: "uiux_4", type: "multiple", points: 2, question: "What is accessibility (a11y)?", options: ["Making sites look good", "Making sites usable for people with disabilities", "Making sites secure", "Making sites fast"], correct: 1 },
-                        { id: "uiux_5", type: "multiple", points: 2, question: "What is the 60-30-10 rule in design?", options: ["Font size ratios", "Color proportion (60% primary, 30% secondary, 10% accent)", "Image sizes", "Spacing measurements"], correct: 1 },
-                        { id: "uiux_essay_1", type: "essay", points: 10, question: "Explain the difference between UI and UX with a real-world example." },
-                        { id: "uiux_essay_2", type: "essay", points: 10, question: "List 3 principles of good UI design and explain each briefly." },
-                        { id: "uiux_essay_3", type: "essay", points: 10, question: "Name 3 accessibility features you would implement in a website and why they're important." }
-                    ]
-                },
-                {
-                    name: "Agile/SCRUM",
-                    totalPoints: 30,
-                    passPoints: 21,
-                    hasObjective: true,
-                    questions: [
-                        { id: "scrum_1", type: "multiple", points: 2, question: "What is Agile?", options: ["A programming language", "An iterative approach to software development", "A project management tool", "A testing framework"], correct: 1 },
-                        { id: "scrum_2", type: "multiple", points: 2, question: "What is a Sprint in SCRUM?", options: ["Running fast", "Time-boxed iteration (usually 1-4 weeks)", "A bug fix", "Emergency deployment"], correct: 1 },
-                        { id: "scrum_3", type: "multiple", points: 2, question: "What are the three questions in Daily Standup?", options: ["Who, What, When", "What I did, what I'll do, any blockers", "Why, How, Where", "Start, Stop, Continue"], correct: 1 },
-                        { id: "scrum_4", type: "multiple", points: 2, question: "What is the format of a User Story?", options: ["Title and description", "As a [user], I want [goal], so that [benefit]", "Given, When, Then", "Problem and solution"], correct: 1 },
-                        { id: "scrum_5", type: "multiple", points: 2, question: "What is Definition of Done (DoD)?", options: ["When sprint ends", "Criteria that must be met for work to be complete", "When client is happy", "When code is written"], correct: 1 },
-                        { id: "scrum_essay_1", type: "essay", points: 10, question: "A critical bug is found in production mid-sprint. How would you handle this in SCRUM?" },
-                        { id: "scrum_essay_2", type: "essay", points: 10, question: "A stakeholder wants to add a major feature mid-sprint. What do you do?" }
-                    ]
-                },
-                {
-                    name: "Python Fundamentals",
-                    totalPoints: 70,
-                    passPoints: 49,
-                    hasObjective: true,
-                    forTrack: "python",
-                    questions: [
-                        { id: "python_1", type: "multiple", points: 2, question: "Which keyword is used to define a function?", options: ["function", "def", "func", "define"], correct: 1 },
-                        { id: "python_2", type: "multiple", points: 2, question: "What is the output of print(type([]))?", options: ["<class 'array'>", "<class 'list'>", "<class 'tuple'>", "<class 'dict'>"], correct: 1 },
-                        { id: "python_3", type: "multiple", points: 2, question: "What does self represent in a Python class?", options: ["The class itself", "Instance of the class", "Parent class", "Static reference"], correct: 1 },
-                        { id: "python_4", type: "multiple", points: 2, question: "What is the difference between == and is?", options: ["No difference", "== compares values, is compares identity", "== is faster", "is is deprecated"], correct: 1 },
-                        { id: "python_5", type: "multiple", points: 2, question: "What module do you import for working with JSON?", options: ["import json", "import jsonlib", "import data", "import parser"], correct: 0 },
-                        { id: "python_code_1", type: "code", points: 20, question: "Complete this function to process a list of numbers:", baseCode: `def process_numbers(numbers):\n    """\n    Return dict with sum of even numbers and count of odd numbers\n    Example: [1, 2, 3, 4, 5, 6] → {'even_sum': 12, 'odd_count': 3}\n    """\n    even_sum = 0\n    odd_count = 0\n    \n    # Add your code here\n    \n    \n    \n    \n    return {'even_sum': even_sum, 'odd_count': odd_count}\n\n# Test your function\nprint(process_numbers([1, 2, 3, 4, 5, 6]))` },
-                        { id: "python_code_2", type: "code", points: 40, question: "Complete this BankAccount class with deposit, withdraw, and transfer methods:", baseCode: `class BankAccount:\n    def __init__(self, account_number, owner_name, balance=0):\n        self.account_number = account_number\n        self.owner_name = owner_name\n        self.balance = balance\n    \n    def deposit(self, amount):\n        # Add your code here\n        pass\n    \n    def withdraw(self, amount):\n        # Add your code here\n        pass\n    \n    def transfer(self, amount, other_account):\n        # Add your code here\n        pass\n    \n    def get_balance(self):\n        return self.balance` }
-                    ]
-                },
-                {
-                    name: "JavaScript Fundamentals",
-                    totalPoints: 70,
-                    passPoints: 49,
-                    hasObjective: true,
-                    forTrack: "javascript",
-                    questions: [
-                        { id: "js_1", type: "multiple", points: 2, question: "How do you declare a variable that cannot be reassigned?", options: ["var", "let", "const", "static"], correct: 2 },
-                        { id: "js_2", type: "multiple", points: 2, question: "What is the output of typeof null?", options: ['"null"', '"object"', '"undefined"', '"number"'], correct: 1 },
-                        { id: "js_3", type: "multiple", points: 2, question: "What is a closure?", options: ["End of program", "Function with access to outer function's variables", "Loop termination", "Syntax error"], correct: 1 },
-                        { id: "js_4", type: "multiple", points: 2, question: "What does === check?", options: ["Value only", "Type only", "Value and type", "Reference"], correct: 2 },
-                        { id: "js_5", type: "multiple", points: 2, question: "What is a Promise?", options: ["Contract", "Object representing eventual completion of async operation", "Variable type", "Loop structure"], correct: 1 },
-                        { id: "js_code_1", type: "code", points: 20, question: "Complete this function to filter and sort products:", baseCode: `function filterProducts(products, minPrice) {\n    /**\n     * Filter products above minPrice, sort by price descending,\n     * return only product names\n     * products: [{name: "Item", price: 100}, ...]\n     */\n    \n    // Add your code here using filter, sort, and map\n    \n    \n    \n    \n}\n\n// Test your function\nconst products = [\n    {name: "Laptop", price: 1000},\n    {name: "Mouse", price: 20},\n    {name: "Keyboard", price: 50},\n    {name: "Monitor", price: 300}\n];\nconsole.log(filterProducts(products, 40));` },
-                        { id: "js_code_2", type: "code", points: 40, question: "Complete this debounce function and async fetchUserData function:", baseCode: `// Part 1: Debounce function\nfunction debounce(func, delay) {\n    /**\n     * Returns a debounced version of func\n     * Delays execution until user stops calling for 'delay' ms\n     */\n    let timeoutId;\n    \n    return function(...args) {\n        // Add your code here\n        \n        \n        \n        \n    };\n}\n\n// Part 2: Async API function\nasync function fetchUserData(userId) {\n    /**\n     * Simulates API call with setTimeout\n     * Returns user data after 1 second\n     * Handles errors\n     */\n    \n    // Add your code here using Promise and async/await\n    \n    \n    \n    \n}\n\n// Test debounce\nconst search = debounce(() => console.log("Searching..."), 500);\nsearch(); search(); search(); // Should only log once\n\n// Test async function\nfetchUserData(1).then(data => console.log(data));` }
-                    ]
-                },
-                {
-                    name: "Teamwork & Communication",
-                    totalPoints: 0,
-                    passPoints: 0,
-                    hasObjective: false,
-                    questions: [
-                        { id: "team_1", type: "essay", points: 0, question: "STAR Method: Tell me about a challenging technical problem you solved. (Situation, Task, Action, Result)" },
-                        { id: "team_2", type: "essay", points: 0, question: "STAR Method: Describe working with a difficult team member. How did you handle it?" },
-                        { id: "team_3", type: "essay", points: 0, question: "STAR Method: Explain a complex technical concept you taught to a non-technical person." },
-                        { id: "team_4", type: "essay", points: 0, question: "Two teammates disagree on using a new framework vs existing stack. You mediate. What do you do?" },
-                        { id: "team_5", type: "essay", points: 0, question: "A senior developer harshly criticizes your code publicly. How do you respond?" },
-                        { id: "team_6", type: "essay", points: 0, question: "Write a Slack message: You're 2 days late on a task due to API bug. The delay impacts others." },
-                        { id: "team_7", type: "essay", points: 0, question: "You're stuck for 3 hours. How do you ask a teammate for help professionally?" },
-                        { id: "team_8", type: "essay", points: 0, question: "Friday 4:30 PM: Critical production bug affects 20% of users. Backend dev is logging off. What do you do?" }
-                    ]
-                }
+                { name: "HTML Fundamentals", totalPoints: 50, passPoints: 35, hasObjective: true, questions: [
+                    { id: "html_1", type: "multiple", points: 2, question: "What is the correct HTML5 doctype declaration?", options: ["<!DOCTYPE html5>", "<!DOCTYPE HTML>", "<!DOCTYPE html>", "<DOCTYPE html>"], correct: 2 },
+                    { id: "html_2", type: "multiple", points: 2, question: "Which HTML element is used for the largest heading?", options: ["<heading>", "<h6>", "<h1>", "<head>"], correct: 2 },
+                    { id: "html_3", type: "multiple", points: 2, question: "What does the <meta charset='UTF-8'> tag do?", options: ["Sets page language", "Defines character encoding", "Sets viewport", "Links stylesheet"], correct: 1 },
+                    { id: "html_4", type: "multiple", points: 2, question: "Which attribute is required for all <img> tags for accessibility?", options: ["src", "alt", "title", "Both a and b"], correct: 3 },
+                    { id: "html_5", type: "multiple", points: 2, question: "What is semantic HTML?", options: ["HTML with inline styles", "HTML that describes content meaning", "HTML with JavaScript", "Compressed HTML"], correct: 1 },
+                    { id: "html_code_1", type: "code", points: 20, question: "Complete this semantic HTML5 blog post structure. Fill in the missing parts:", baseCode: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>My Blog Post</title>\n</head>\n<body>\n    <!-- Add header with navigation here -->\n    \n    \n    <main>\n        <!-- Add article with title, author, date, content, and image here -->\n        \n        \n    </main>\n    \n    <!-- Add sidebar with related posts here -->\n    \n    \n    <!-- Add footer with copyright here -->\n    \n    \n</body>\n</html>" },
+                    { id: "html_code_2", type: "code", points: 20, question: "Complete this accessible contact form. Add proper labels and validation:", baseCode: "<form action=\"/submit\" method=\"POST\">\n    <fieldset>\n        <legend>Contact Information</legend>\n        \n        <!-- Add name input (required) with label -->\n        \n        \n        <!-- Add email input (required, type=email) with label -->\n        \n        \n        <!-- Add phone input (optional) with label -->\n        \n        \n        <!-- Add message textarea (required, minlength=10) with label -->\n        \n        \n        <button type=\"submit\">Send Message</button>\n    </fieldset>\n</form>" }
+                ]},
+                { name: "CSS & Styling", totalPoints: 60, passPoints: 42, hasObjective: true, questions: [
+                    { id: "css_1", type: "multiple", points: 2, question: "What does CSS stand for?", options: ["Cascading Style Sheets", "Creative Style Syntax", "Computer Style Sheets", "Colored Style Sheets"], correct: 0 },
+                    { id: "css_2", type: "multiple", points: 2, question: "Which CSS property is used to change text color?", options: ["text-color", "font-color", "color", "text-style"], correct: 2 },
+                    { id: "css_3", type: "multiple", points: 2, question: "Which CSS selector has the highest specificity?", options: ["Element selector", "Class selector", "ID selector", "Universal selector"], correct: 2 },
+                    { id: "css_4", type: "multiple", points: 2, question: "What is the Box Model order from inside to outside?", options: ["Content, Border, Padding, Margin", "Content, Padding, Border, Margin", "Content, Margin, Padding, Border", "Padding, Content, Border, Margin"], correct: 1 },
+                    { id: "css_5", type: "multiple", points: 2, question: "How do you center a div horizontally with flexbox?", options: ["text-align: center", "justify-content: center", "align-items: center", "center: true"], correct: 1 },
+                    { id: "css_code_1", type: "code", points: 25, question: "Complete this responsive card component. Add the missing CSS properties:", baseCode: ".card {\n    /* Add: width 300px, center with margin, box-shadow */\n    \n    \n    border-radius: 10px;\n    overflow: hidden;\n}\n\n.card-image {\n    /* Add: full width, 200px height, object-fit cover */\n    \n    \n}\n\n.card-content {\n    /* Add: padding 20px */\n    \n}\n\n.card-title {\n    /* Add: font-size 24px, bold, margin-bottom 10px */\n    \n    \n}\n\n.card-description {\n    /* Add: color gray, font-size 16px, line-height 1.5 */\n    \n    \n}\n\n.card-button {\n    /* Add: blue background, white text, padding, rounded corners */\n    \n    \n    border: none;\n    cursor: pointer;\n}\n\n.card-button:hover {\n    /* Add: darker blue on hover */\n    \n}\n\n/* Mobile: below 768px */\n@media (max-width: 768px) {\n    .card {\n        /* Add: width 100%, smaller padding */\n        \n        \n    }\n}" },
+                    { id: "css_code_2", type: "code", points: 25, question: "Complete this responsive navigation bar. Fill in the flexbox properties:", baseCode: ".navbar {\n    /* Add: flex display, space-between, align-items center */\n    \n    \n    padding: 1rem 2rem;\n    background: #333;\n    color: white;\n}\n\n.nav-menu {\n    /* Add: flex display, gap between items */\n    \n    \n    list-style: none;\n}\n\n.nav-item a {\n    color: white;\n    text-decoration: none;\n    /* Add: padding, transition */\n    \n    \n}\n\n.nav-item a:hover {\n    /* Add: color change on hover */\n    \n}\n\n/* Mobile: below 768px */\n@media (max-width: 768px) {\n    .nav-menu {\n        /* Add: vertical direction, full width */\n        \n        \n    }\n}" }
+                ]},
+                { name: "UI/UX Principles", totalPoints: 40, passPoints: 28, hasObjective: true, questions: [
+                    { id: "uiux_1", type: "multiple", points: 2, question: "What does UX stand for?", options: ["User Experience", "User Exploration", "Universal Experience", "User Extension"], correct: 0 },
+                    { id: "uiux_2", type: "multiple", points: 2, question: "What is the primary goal of UI design?", options: ["Make it look pretty", "Make it functional and intuitive", "Add many features", "Use latest trends"], correct: 1 },
+                    { id: "uiux_3", type: "multiple", points: 2, question: "What is a wireframe?", options: ["Final design mockup", "Basic layout sketch showing structure", "Code framework", "Design system"], correct: 1 },
+                    { id: "uiux_4", type: "multiple", points: 2, question: "What is accessibility (a11y)?", options: ["Making sites look good", "Making sites usable for people with disabilities", "Making sites secure", "Making sites fast"], correct: 1 },
+                    { id: "uiux_5", type: "multiple", points: 2, question: "What is the 60-30-10 rule in design?", options: ["Font size ratios", "Color proportion (60% primary, 30% secondary, 10% accent)", "Image sizes", "Spacing measurements"], correct: 1 },
+                    { id: "uiux_essay_1", type: "essay", points: 10, question: "Explain the difference between UI and UX with a real-world example." },
+                    { id: "uiux_essay_2", type: "essay", points: 10, question: "List 3 principles of good UI design and explain each briefly." },
+                    { id: "uiux_essay_3", type: "essay", points: 10, question: "Name 3 accessibility features you would implement in a website and why they're important." }
+                ]},
+                { name: "Agile/SCRUM", totalPoints: 30, passPoints: 21, hasObjective: true, questions: [
+                    { id: "scrum_1", type: "multiple", points: 2, question: "What is Agile?", options: ["A programming language", "An iterative approach to software development", "A project management tool", "A testing framework"], correct: 1 },
+                    { id: "scrum_2", type: "multiple", points: 2, question: "What is a Sprint in SCRUM?", options: ["Running fast", "Time-boxed iteration (usually 1-4 weeks)", "A bug fix", "Emergency deployment"], correct: 1 },
+                    { id: "scrum_3", type: "multiple", points: 2, question: "What are the three questions in Daily Standup?", options: ["Who, What, When", "What I did, what I'll do, any blockers", "Why, How, Where", "Start, Stop, Continue"], correct: 1 },
+                    { id: "scrum_4", type: "multiple", points: 2, question: "What is the format of a User Story?", options: ["Title and description", "As a [user], I want [goal], so that [benefit]", "Given, When, Then", "Problem and solution"], correct: 1 },
+                    { id: "scrum_5", type: "multiple", points: 2, question: "What is Definition of Done (DoD)?", options: ["When sprint ends", "Criteria that must be met for work to be complete", "When client is happy", "When code is written"], correct: 1 },
+                    { id: "scrum_essay_1", type: "essay", points: 10, question: "A critical bug is found in production mid-sprint. How would you handle this in SCRUM?" },
+                    { id: "scrum_essay_2", type: "essay", points: 10, question: "A stakeholder wants to add a major feature mid-sprint. What do you do?" }
+                ]},
+                { name: "Python Fundamentals", totalPoints: 70, passPoints: 49, hasObjective: true, forTrack: "python", questions: [
+                    { id: "python_1", type: "multiple", points: 2, question: "Which keyword is used to define a function?", options: ["function", "def", "func", "define"], correct: 1 },
+                    { id: "python_2", type: "multiple", points: 2, question: "What is the output of print(type([]))?", options: ["<class 'array'>", "<class 'list'>", "<class 'tuple'>", "<class 'dict'>"], correct: 1 },
+                    { id: "python_3", type: "multiple", points: 2, question: "What does self represent in a Python class?", options: ["The class itself", "Instance of the class", "Parent class", "Static reference"], correct: 1 },
+                    { id: "python_4", type: "multiple", points: 2, question: "What is the difference between == and is?", options: ["No difference", "== compares values, is compares identity", "== is faster", "is is deprecated"], correct: 1 },
+                    { id: "python_5", type: "multiple", points: 2, question: "What module do you import for working with JSON?", options: ["import json", "import jsonlib", "import data", "import parser"], correct: 0 },
+                    { id: "python_code_1", type: "code", points: 20, question: "Complete this function to process a list of numbers:", baseCode: "def process_numbers(numbers):\n    \"\"\"\n    Return dict with sum of even numbers and count of odd numbers\n    Example: [1, 2, 3, 4, 5, 6] → {'even_sum': 12, 'odd_count': 3}\n    \"\"\"\n    even_sum = 0\n    odd_count = 0\n    \n    # Add your code here\n    \n    \n    \n    \n    return {'even_sum': even_sum, 'odd_count': odd_count}\n\n# Test your function\nprint(process_numbers([1, 2, 3, 4, 5, 6]))" },
+                    { id: "python_code_2", type: "code", points: 40, question: "Complete this BankAccount class with deposit, withdraw, and transfer methods:", baseCode: "class BankAccount:\n    def __init__(self, account_number, owner_name, balance=0):\n        self.account_number = account_number\n        self.owner_name = owner_name\n        self.balance = balance\n    \n    def deposit(self, amount):\n        # Add your code here\n        pass\n    \n    def withdraw(self, amount):\n        # Add your code here\n        pass\n    \n    def transfer(self, amount, other_account):\n        # Add your code here\n        pass\n    \n    def get_balance(self):\n        return self.balance" }
+                ]},
+                { name: "JavaScript Fundamentals", totalPoints: 70, passPoints: 49, hasObjective: true, forTrack: "javascript", questions: [
+                    { id: "js_1", type: "multiple", points: 2, question: "How do you declare a variable that cannot be reassigned?", options: ["var", "let", "const", "static"], correct: 2 },
+                    { id: "js_2", type: "multiple", points: 2, question: "What is the output of typeof null?", options: ['"null"', '"object"', '"undefined"', '"number"'], correct: 1 },
+                    { id: "js_3", type: "multiple", points: 2, question: "What is a closure?", options: ["End of program", "Function with access to outer function's variables", "Loop termination", "Syntax error"], correct: 1 },
+                    { id: "js_4", type: "multiple", points: 2, question: "What does === check?", options: ["Value only", "Type only", "Value and type", "Reference"], correct: 2 },
+                    { id: "js_5", type: "multiple", points: 2, question: "What is a Promise?", options: ["Contract", "Object representing eventual completion of async operation", "Variable type", "Loop structure"], correct: 1 },
+                    { id: "js_code_1", type: "code", points: 20, question: "Complete this function to filter and sort products:", baseCode: "function filterProducts(products, minPrice) {\n    /**\n     * Filter products above minPrice, sort by price descending,\n     * return only product names\n     * products: [{name: \"Item\", price: 100}, ...]\n     */\n    \n    // Add your code here using filter, sort, and map\n    \n    \n    \n    \n}\n\n// Test your function\nconst products = [\n    {name: \"Laptop\", price: 1000},\n    {name: \"Mouse\", price: 20},\n    {name: \"Keyboard\", price: 50},\n    {name: \"Monitor\", price: 300}\n];\nconsole.log(filterProducts(products, 40));" },
+                    { id: "js_code_2", type: "code", points: 40, question: "Complete this debounce function and async fetchUserData function:", baseCode: "// Part 1: Debounce function\nfunction debounce(func, delay) {\n    /**\n     * Returns a debounced version of func\n     * Delays execution until user stops calling for 'delay' ms\n     */\n    let timeoutId;\n    \n    return function(...args) {\n        // Add your code here\n        \n        \n        \n        \n    };\n}\n\n// Part 2: Async API function\nasync function fetchUserData(userId) {\n    /**\n     * Simulates API call with setTimeout\n     * Returns user data after 1 second\n     * Handles errors\n     */\n    \n    // Add your code here using Promise and async/await\n    \n    \n    \n    \n}\n\n// Test debounce\nconst search = debounce(() => console.log(\"Searching...\"), 500);\nsearch(); search(); search(); // Should only log once\n\n// Test async function\nfetchUserData(1).then(data => console.log(data));" }
+                ]},
+                { name: "Teamwork & Communication", totalPoints: 0, passPoints: 0, hasObjective: false, questions: [
+                    { id: "team_1", type: "essay", points: 0, question: "STAR Method: Tell me about a challenging technical problem you solved. (Situation, Task, Action, Result)" },
+                    { id: "team_2", type: "essay", points: 0, question: "STAR Method: Describe working with a difficult team member. How did you handle it?" },
+                    { id: "team_3", type: "essay", points: 0, question: "STAR Method: Explain a complex technical concept you taught to a non-technical person." },
+                    { id: "team_4", type: "essay", points: 0, question: "Two teammates disagree on using a new framework vs existing stack. You mediate. What do you do?" },
+                    { id: "team_5", type: "essay", points: 0, question: "A senior developer harshly criticizes your code publicly. How do you respond?" },
+                    { id: "team_6", type: "essay", points: 0, question: "Write a Slack message: You're 2 days late on a task due to API bug. The delay impacts others." },
+                    { id: "team_7", type: "essay", points: 0, question: "You're stuck for 3 hours. How do you ask a teammate for help professionally?" },
+                    { id: "team_8", type: "essay", points: 0, question: "Friday 4:30 PM: Critical production bug affects 20% of users. Backend dev is logging off. What do you do?" }
+                ]}
             ];
 
             const getFilteredSections = () => sections.filter(s => !s.forTrack || s.forTrack === studentInfo.track);
 
             useEffect(() => {
                 if (started && !completed) {
-                    const handleBeforeUnload = (e) => { e.preventDefault(); e.returnValue = ''; };
-                    window.addEventListener('beforeunload', handleBeforeUnload);
-                    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+                    const h = (e) => { e.preventDefault(); e.returnValue = ''; };
+                    window.addEventListener('beforeunload', h);
+                    return () => window.removeEventListener('beforeunload', h);
                 }
             }, [started, completed]);
 
             useEffect(() => {
                 if (started && !completed && timeRemaining > 0) {
-                    const timer = setInterval(() => {
-                        setTimeRemaining(prev => { if (prev <= 1) { handleSubmit(); return 0; } return prev - 1; });
+                    const t = setInterval(() => {
+                        setTimeRemaining(p => { if (p <= 1) { handleSubmit(); return 0; } return p - 1; });
                     }, 1000);
-                    return () => clearInterval(timer);
+                    return () => clearInterval(t);
                 }
             }, [started, completed, timeRemaining]);
 
@@ -192,433 +129,64 @@
             };
 
             const handleStart = () => { if (studentInfo.name && studentInfo.email && studentInfo.track) setStarted(true); };
-            const handleAnswerChange = (qId, val) => setAnswers(prev => ({ ...prev, [qId]: val }));
+            const handleAnswerChange = (qId, val) => setAnswers(p => ({ ...p, [qId]: val }));
 
             const calculateResults = () => {
-                const filteredSections = getFilteredSections();
-                const sectionResults = filteredSections.map(section => {
-                    const hasManualReview = section.questions.some(q => q.type !== 'multiple');
-                    
-                    if (!section.hasObjective) {
-                        return { name: section.name, earnedPoints: 0, totalPoints: 0, passPoints: 0, passed: null, percentage: 0, status: 'PENDING REVIEW' };
-                    }
-
-                    let earnedPoints = 0, multipleChoicePoints = 0;
-                    section.questions.forEach(q => {
-                        const ans = answers[q.id];
-                        if (q.type === 'multiple') {
-                            multipleChoicePoints += q.points;
-                            if (ans !== undefined && ans === q.correct) earnedPoints += q.points;
-                        }
-                    });
-
-                    if (hasManualReview) {
-                        return { name: section.name, earnedPoints, totalPoints: section.totalPoints, passPoints: section.passPoints, passed: null, percentage: multipleChoicePoints > 0 ? Math.round((earnedPoints / multipleChoicePoints) * 100) : 0, status: 'PENDING REVIEW' };
-                    }
-
-                    const passed = earnedPoints >= section.passPoints;
-                    return { name: section.name, earnedPoints, totalPoints: section.totalPoints, passPoints: section.passPoints, passed, percentage: Math.round((earnedPoints / section.totalPoints) * 100), status: passed ? 'PASSED' : 'FAILED' };
+                const fSections = getFilteredSections();
+                const sResults = fSections.map(sec => {
+                    const hasManual = sec.questions.some(q => q.type === 'code' || q.type === 'essay');
+                    if (!sec.hasObjective) return { name: sec.name, earnedPoints: 0, totalPoints: 0, passPoints: 0, passed: null, percentage: 0, status: 'PENDING REVIEW' };
+                    let earned = 0;
+                    sec.questions.forEach(q => { const a = answers[q.id]; if (q.type === 'multiple' && a !== undefined && a === q.correct) earned += q.points; });
+                    if (hasManual) return { name: sec.name, earnedPoints: earned, totalPoints: sec.totalPoints, passPoints: sec.passPoints, passed: null, percentage: Math.round((earned / sec.totalPoints) * 100), status: 'PENDING REVIEW' };
+                    const passed = earned >= sec.passPoints;
+                    return { name: sec.name, earnedPoints: earned, totalPoints: sec.totalPoints, passPoints: sec.passPoints, passed, percentage: Math.round((earned / sec.totalPoints) * 100), status: passed ? 'PASSED' : 'FAILED' };
                 });
-
-                const objSections = sectionResults.filter(s => s.status !== 'PENDING REVIEW');
-                const totalEarned = objSections.reduce((sum, r) => sum + r.earnedPoints, 0);
-                const totalPoints = objSections.reduce((sum, r) => sum + r.totalPoints, 0);
-                const totalPass = objSections.reduce((sum, r) => sum + r.passPoints, 0);
-                return { sections: sectionResults, overall: { earnedPoints: totalEarned, totalPoints, passPoints: totalPass, percentage: totalPoints > 0 ? Math.round((totalEarned / totalPoints) * 100) : 0, passed: totalEarned >= totalPass }};
+                const autoGraded = sResults.filter(s => s.status === 'PASSED' || s.status === 'FAILED');
+                const tEarned = autoGraded.reduce((s, r) => s + r.earnedPoints, 0);
+                const tPoints = autoGraded.reduce((s, r) => s + r.totalPoints, 0);
+                const tPass = autoGraded.reduce((s, r) => s + r.passPoints, 0);
+                return { sections: sResults, overall: { earnedPoints: tEarned, totalPoints: tPoints, passPoints: tPass, percentage: tPoints > 0 ? Math.round((tEarned / tPoints) * 100) : 0, passed: tEarned >= tPass }};
             };
 
-            const sendToGoogleSheets = async (resultsData) => {
+            const sendToGoogleSheets = async (rData) => {
                 setSubmitting(true);
                 try {
-                    const submissionData = {
-                        timestamp: new Date().toISOString(), studentName: studentInfo.name, studentEmail: studentInfo.email, track: studentInfo.track.toUpperCase(),
-                        overallScore: `${resultsData.overall.earnedPoints}/${resultsData.overall.totalPoints}`, overallPercentage: resultsData.overall.percentage,
-                        overallStatus: resultsData.overall.passed ? 'PASSED' : 'NEEDS REVIEW', sections: {}, answers: {}
-                    };
-                    resultsData.sections.forEach(s => { submissionData.sections[s.name] = { score: `${s.earnedPoints}/${s.totalPoints}`, percentage: s.percentage, status: s.status }; });
-                    getFilteredSections().forEach(section => {
-                        section.questions.forEach(q => {
-                            const ans = answers[q.id];
-                            let answerText = q.type === 'multiple' ? (ans !== undefined ? q.options[ans] : 'NOT ANSWERED') : (ans || 'NOT ANSWERED');
-                            submissionData.answers[q.id] = { question: q.question, answer: answerText, points: q.points, type: q.type };
-                        });
-                    });
-                    await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(submissionData) });
+                    const subData = { timestamp: new Date().toISOString(), studentName: studentInfo.name, studentEmail: studentInfo.email, track: studentInfo.track.toUpperCase(), overallScore: `${rData.overall.earnedPoints}/${rData.overall.totalPoints}`, overallPercentage: rData.overall.percentage, overallStatus: rData.overall.passed ? 'PASSED' : 'NEEDS REVIEW', sections: {}, answers: {} };
+                    rData.sections.forEach(s => { subData.sections[s.name] = { score: `${s.earnedPoints}/${s.totalPoints}`, percentage: s.percentage, status: s.status }; });
+                    getFilteredSections().forEach(sec => { sec.questions.forEach(q => { const a = answers[q.id]; let aText = q.type === 'multiple' ? (a !== undefined ? q.options[a] : 'NOT ANSWERED') : (a || 'NOT ANSWERED'); subData.answers[q.id] = { question: q.question, answer: aText, points: q.points, type: q.type }; }); });
+                    await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(subData) });
                     setSubmitStatus('success'); setSubmitting(false);
-                } catch (error) { console.error('Error:', error); setSubmitStatus('error'); setSubmitting(false); }
+                } catch (e) { console.error('Error:', e); setSubmitStatus('error'); setSubmitting(false); }
             };
 
-            const handleSubmit = () => { const results = calculateResults(); setResults(results); setCompleted(true); sendToGoogleSheets(results); };
+            const handleSubmit = () => { const r = calculateResults(); setResults(r); setCompleted(true); sendToGoogleSheets(r); };
 
             const downloadCSV = () => {
-                let csv = 'STUDENT INFORMATION\n';
-                csv += `Name,${studentInfo.name}\nEmail,${studentInfo.email}\nTrack,${studentInfo.track.toUpperCase()}\nSubmission Date,${new Date().toLocaleString()}\n\n`;
-                csv += 'SECTION RESULTS\nSection,Points Earned,Total Points,Pass Points,Percentage,Status\n';
+                let csv = `STUDENT INFORMATION\nName,${studentInfo.name}\nEmail,${studentInfo.email}\nTrack,${studentInfo.track.toUpperCase()}\nSubmission Date,${new Date().toLocaleString()}\n\nSECTION RESULTS\nSection,Points Earned,Total Points,Pass Points,Percentage,Status\n`;
                 results.sections.forEach(s => { csv += `${s.name},${s.earnedPoints},${s.totalPoints},${s.passPoints},${s.percentage}%,${s.status}\n`; });
-                csv += '\nOVERALL RESULTS\nTotal Points Earned,${results.overall.earnedPoints}\nTotal Possible Points,${results.overall.totalPoints}\nOverall Percentage,${results.overall.percentage}%\nOverall Status,${results.overall.passed ? 'PASSED' : 'NEEDS REVIEW'}\n\n';
-                csv += 'DETAILED ANSWERS\nQuestion ID,Question,Answer,Points\n';
-                getFilteredSections().forEach(section => {
-                    section.questions.forEach(q => {
-                        const ans = answers[q.id];
-                        let answerText = q.type === 'multiple' ? (ans !== undefined ? q.options[ans] : 'NOT ANSWERED') : (ans ? ans.replace(/,/g, ';').replace(/\n/g, ' | ') : 'NOT ANSWERED');
-                        const cleanQ = q.question.replace(/,/g, ';').replace(/\n/g, ' ');
-                        csv += `${q.id},"${cleanQ}","${answerText}",${q.points}\n`;
-                    });
-                });
-                const blob = new Blob([csv], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${studentInfo.name.replace(/\s/g, '_')}_${studentInfo.track}_assessment.csv`;
-                a.click();
+                csv += `\nOVERALL RESULTS (Auto-Graded Only)\nTotal Points Earned,${results.overall.earnedPoints}\nTotal Possible Points,${results.overall.totalPoints}\nOverall Percentage,${results.overall.percentage}%\nOverall Status,${results.overall.passed ? 'PASSED' : 'NEEDS REVIEW'}\n\nDETAILED ANSWERS\nQuestion ID,Question,Answer,Points\n`;
+                getFilteredSections().forEach(sec => { sec.questions.forEach(q => { const a = answers[q.id]; let aText = q.type === 'multiple' ? (a !== undefined ? q.options[a] : 'NOT ANSWERED') : (a ? a.replace(/,/g, ';').replace(/\n/g, ' | ') : 'NOT ANSWERED'); const cQ = q.question.replace(/,/g, ';').replace(/\n/g, ' '); csv += `${q.id},"${cQ}","${aText}",${q.points}\n`; }); });
+                const b = new Blob([csv], { type: 'text/csv' }); const u = window.URL.createObjectURL(b); const a = document.createElement('a'); a.href = u; a.download = `${studentInfo.name.replace(/\s/g, '_')}_${studentInfo.track}_assessment.csv`; a.click();
             };
 
-            const getTotalQuestions = () => getFilteredSections().reduce((sum, s) => sum + s.questions.length, 0);
-            const getCurrentQuestionNumber = () => {
-                const filtered = getFilteredSections();
-                let count = 0;
-                for (let i = 0; i < currentSection; i++) count += filtered[i].questions.length;
-                return count + currentQuestion + 1;
-            };
-            const getProgress = () => { const total = getTotalQuestions(); const current = getCurrentQuestionNumber(); return (current / total) * 100; };
-
-            const goToNextQuestion = () => {
-                const filtered = getFilteredSections();
-                const section = filtered[currentSection];
-                if (currentQuestion < section.questions.length - 1) setCurrentQuestion(currentQuestion + 1);
-                else if (currentSection < filtered.length - 1) { setCurrentSection(currentSection + 1); setCurrentQuestion(0); }
-            };
-
-            const goToPrevQuestion = () => {
-                if (currentQuestion > 0) setCurrentQuestion(currentQuestion - 1);
-                else if (currentSection > 0) {
-                    const filtered = getFilteredSections();
-                    setCurrentSection(currentSection - 1);
-                    setCurrentQuestion(filtered[currentSection - 1].questions.length - 1);
-                }
-            };
-
-            const isLastQuestion = () => {
-                const filtered = getFilteredSections();
-                return currentSection === filtered.length - 1 && currentQuestion === filtered[currentSection].questions.length - 1;
-            };
+            const getTotalQuestions = () => getFilteredSections().reduce((s, sec) => s + sec.questions.length, 0);
+            const getCurrentQuestionNumber = () => { const f = getFilteredSections(); let c = 0; for (let i = 0; i < currentSection; i++) c += f[i].questions.length; return c + currentQuestion + 1; };
+            const getProgress = () => { const t = getTotalQuestions(); const c = getCurrentQuestionNumber(); return (c / t) * 100; };
+            const goToNextQuestion = () => { const f = getFilteredSections(); const s = f[currentSection]; if (currentQuestion < s.questions.length - 1) setCurrentQuestion(currentQuestion + 1); else if (currentSection < f.length - 1) { setCurrentSection(currentSection + 1); setCurrentQuestion(0); } };
+            const goToPrevQuestion = () => { if (currentQuestion > 0) setCurrentQuestion(currentQuestion - 1); else if (currentSection > 0) { const f = getFilteredSections(); setCurrentSection(currentSection - 1); setCurrentQuestion(f[currentSection - 1].questions.length - 1); } };
+            const isLastQuestion = () => { const f = getFilteredSections(); return currentSection === f.length - 1 && currentQuestion === f[currentSection].questions.length - 1; };
 
             if (!started) {
-                return (
-                    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4" style={{ userSelect: 'none' }}>
-                        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
-                            <div className="text-center mb-8">
-                                <h1 className="text-4xl font-bold text-gray-900 mb-2">Technical Interview Assessment</h1>
-                                <p className="text-gray-600">Complete Developer Skills Evaluation</p>
-                            </div>
-                            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-                                <div className="flex items-start">
-                                    <AlertTriangle />
-                                    <div className="ml-3">
-                                        <h3 className="font-semibold text-yellow-800 mb-2">Important Instructions:</h3>
-                                        <ul className="text-sm text-yellow-700 space-y-1">
-                                            <li>• Time Limit: 2 hours</li>
-                                            <li>• Do NOT leave this page - progress will be lost</li>
-                                            <li>• Answer all questions to the best of your ability</li>
-                                            <li>• For code questions: edit the provided code directly</li>
-                                            <li>• No AI assistance allowed</li>
-                                            <li>• Results submitted to Google Sheets automatically</li>
-                                            <li>• Download CSV as backup proof of submission</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="space-y-4 mb-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                                    <input type="text" value={studentInfo.name} onChange={(e) => setStudentInfo(prev => ({ ...prev, name: e.target.value }))}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Doe" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                                    <input type="email" value={studentInfo.email} onChange={(e) => setStudentInfo(prev => ({ ...prev, email: e.target.value }))}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john@example.com" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Select Your Track *</label>
-                                    <select value={studentInfo.track} onChange={(e) => setStudentInfo(prev => ({ ...prev, track: e.target.value }))}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                                        <option value="">-- Choose Track --</option>
-                                        <option value="python">Python Developer</option>
-                                        <option value="javascript">JavaScript Developer</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button onClick={handleStart} disabled={!studentInfo.name || !studentInfo.email || !studentInfo.track}
-                                className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">
-                                Start Assessment
-                            </button>
-                        </div>
-                    </div>
-                );
+                return (<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4" style={{userSelect:'none'}}><div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full"><div className="text-center mb-8"><h1 className="text-4xl font-bold text-gray-900 mb-2">Technical Interview Assessment</h1><p className="text-gray-600">Complete Developer Skills Evaluation</p></div><div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6"><div className="flex items-start"><AlertTriangle/><div className="ml-3"><h3 className="font-semibold text-yellow-800 mb-2">Important Instructions:</h3><ul className="text-sm text-yellow-700 space-y-1"><li>• Time Limit: 2 hours</li><li>• Do NOT leave this page - progress will be lost</li><li>• Answer all questions to the best of your ability</li><li>• For code questions: edit the provided code directly</li><li>• No AI assistance allowed</li><li>• Results submitted to Google Sheets automatically</li><li>• Download CSV as backup proof of submission</li></ul></div></div></div><div className="space-y-4 mb-6"><div><label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label><input type="text" value={studentInfo.name} onChange={(e)=>setStudentInfo(p=>({...p,name:e.target.value}))} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Doe"/></div><div><label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label><input type="email" value={studentInfo.email} onChange={(e)=>setStudentInfo(p=>({...p,email:e.target.value}))} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john@example.com"/></div><div><label className="block text-sm font-medium text-gray-700 mb-2">Select Your Track *</label><select value={studentInfo.track} onChange={(e)=>setStudentInfo(p=>({...p,track:e.target.value}))} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"><option value="">-- Choose Track --</option><option value="python">Python Developer</option><option value="javascript">JavaScript Developer</option></select></div></div><button onClick={handleStart} disabled={!studentInfo.name||!studentInfo.email||!studentInfo.track} className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed">Start Assessment</button></div></div>);
             }
 
             if (completed && results) {
-                return (
-                    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" style={{ userSelect: 'none' }}>
-                        <div className="max-w-4xl mx-auto">
-                            <div className="bg-white rounded-2xl shadow-2xl p-8">
-                                <div className="text-center mb-8">
-                                    <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-4 ${results.overall.passed ? 'bg-green-100' : 'bg-yellow-100'}`}>
-                                        {results.overall.passed ? <CheckCircle className="text-green-600" /> : <AlertTriangle className="text-yellow-600" />}
-                                    </div>
-                                    <h1 className="text-4xl font-bold text-gray-900 mb-2">Assessment Submitted!</h1>
-                                    <p className="text-xl text-gray-600">{studentInfo.name}</p>
-                                    <p className="text-sm text-gray-500">{studentInfo.track.toUpperCase()} Track</p>
-                                </div>
-
-                                {submitting && (
-                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-                                        <Upload className="text-blue-600 flex-shrink-0 animate-pulse" />
-                                        <div>
-                                            <p className="font-semibold text-blue-800">⏳ Submitting to Google Sheets...</p>
-                                            <p className="text-sm text-blue-700">Please wait while your responses are being submitted.</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {submitStatus === 'success' && (
-                                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-                                        <CheckCircle className="text-green-600 flex-shrink-0" />
-                                        <div>
-                                            <p className="font-semibold text-green-800">✓ Successfully Submitted to Google Sheets!</p>
-                                            <p className="text-sm text-green-700">Your instructor has received your responses automatically.</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {submitStatus === 'error' && (
-                                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-                                        <XCircle className="text-red-600 flex-shrink-0" />
-                                        <div>
-                                            <p className="font-semibold text-red-800">⚠️ Submission Error</p>
-                                            <p className="text-sm text-red-700">Unable to submit to Google Sheets. Please download the CSV below and email it to your instructor.</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-                                    <div className="flex items-start">
-                                        <AlertTriangle className="text-yellow-600 mr-3 flex-shrink-0" />
-                                        <div>
-                                            <h3 className="font-semibold text-yellow-800 mb-2">📥 IMPORTANT: Download Your CSV File</h3>
-                                            <p className="text-sm text-yellow-700 mb-2">Always download and keep your CSV file as backup proof of submission.</p>
-                                            <ul className="text-sm text-yellow-700 space-y-1">
-                                                <li>✓ Click the download button below</li>
-                                                <li>✓ Save the CSV file safely on your device</li>
-                                                <li>✓ This serves as your proof of completion</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white mb-8">
-                                    <h2 className="text-2xl font-bold mb-4">Objective Questions Results</h2>
-                                    <p className="text-sm opacity-90 mb-4">Multiple-choice questions only (Essay & code questions pending review)</p>
-                                    <div className="grid grid-cols-3 gap-4 text-center">
-                                        <div>
-                                            <div className="text-3xl font-bold">{results.overall.percentage}%</div>
-                                            <div className="text-sm opacity-90">Score</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-3xl font-bold">{results.overall.earnedPoints}/{results.overall.totalPoints}</div>
-                                            <div className="text-sm opacity-90">Points</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-3xl font-bold">{results.overall.passed ? 'PASSED' : 'REVIEW'}</div>
-                                            <div className="text-sm opacity-90">Status</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="mb-8">
-                                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Section Breakdown</h2>
-                                    <div className="space-y-4">
-                                        {results.sections.map((section, idx) => (
-                                            <div key={idx} className={`border-l-4 p-4 rounded-r-lg ${
-                                                section.status === 'PENDING REVIEW' ? 'border-yellow-500 bg-yellow-50' :
-                                                section.passed ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'
-                                            }`}>
-                                                <div className="flex justify-between items-start mb-2">
-                                                    <div>
-                                                        <h3 className="font-semibold text-lg text-gray-900">{section.name}</h3>
-                                                        {section.status !== 'PENDING REVIEW' && (
-                                                            <p className="text-sm text-gray-600">Pass requirement: {section.passPoints} points</p>
-                                                        )}
-                                                        {section.status === 'PENDING REVIEW' && section.earnedPoints > 0 && (
-                                                            <p className="text-sm text-gray-600">Multiple-choice: {section.earnedPoints} points (Code/essay pending)</p>
-                                                        )}
-                                                    </div>
-                                                    <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                                                        section.status === 'PENDING REVIEW' ? 'bg-yellow-200 text-yellow-800' :
-                                                        section.passed ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
-                                                    }`}>
-                                                        {section.status}
-                                                    </div>
-                                                </div>
-                                                {section.status !== 'PENDING REVIEW' ? (
-                                                    <div className="flex justify-between items-center">
-                                                        <div className="text-2xl font-bold text-gray-900">{section.earnedPoints}/{section.totalPoints} points</div>
-                                                        <div className="text-xl font-semibold text-gray-700">{section.percentage}%</div>
-                                                    </div>
-                                                ) : section.earnedPoints > 0 ? (
-                                                    <div className="flex justify-between items-center">
-                                                        <div className="text-2xl font-bold text-gray-900">{section.earnedPoints} points (auto-graded only)</div>
-                                                        <div className="text-xl font-semibold text-yellow-700">{section.percentage}% (partial)</div>
-                                                    </div>
-                                                ) : (
-                                                    <div className="text-gray-600 italic">Manual review required for all questions</div>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                                    <h3 className="font-semibold text-blue-900 mb-3">📋 What Happens Next?</h3>
-                                    <ul className="text-blue-800 text-sm space-y-2">
-                                        <li>✓ Multiple-choice questions have been auto-graded</li>
-                                        <li>✓ {submitStatus === 'success' ? 'Results automatically sent to instructor via Google Sheets' : 'Please download CSV and share with instructor'}</li>
-                                        <li>✓ Code and essay questions are marked as "PENDING REVIEW"</li>
-                                        <li>✓ Instructor will manually review and grade all written responses</li>
-                                        <li>✓ Final grades will be shared within 3-5 business days</li>
-                                        <li>✓ Keep your downloaded CSV as proof of submission</li>
-                                    </ul>
-                                </div>
-
-                                <button onClick={downloadCSV}
-                                    className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-                                    <Download />
-                                    Download My Responses (CSV) - REQUIRED
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
+                return (<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" style={{userSelect:'none'}}><div className="max-w-4xl mx-auto"><div className="bg-white rounded-2xl shadow-2xl p-8"><div className="text-center mb-8"><div className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-4 ${results.overall.passed?'bg-green-100':'bg-yellow-100'}`}>{results.overall.passed?<CheckCircle className="text-green-600"/>:<AlertTriangle className="text-yellow-600"/>}</div><h1 className="text-4xl font-bold text-gray-900 mb-2">Assessment Submitted!</h1><p className="text-xl text-gray-600">{studentInfo.name}</p><p className="text-sm text-gray-500">{studentInfo.track.toUpperCase()} Track</p></div>{submitting&&<div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start gap-3"><Upload className="text-blue-600 flex-shrink-0 animate-pulse"/><div><p className="font-semibold text-blue-800">⏳ Submitting to Google Sheets...</p><p className="text-sm text-blue-700">Please wait while your responses are being submitted.</p></div></div>}{submitStatus==='success'&&<div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-start gap-3"><CheckCircle className="text-green-600 flex-shrink-0"/><div><p className="font-semibold text-green-800">✓ Successfully Submitted to Google Sheets!</p><p className="text-sm text-green-700">Your instructor has received your responses automatically.</p></div></div>}{submitStatus==='error'&&<div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-start gap-3"><XCircle className="text-red-600 flex-shrink-0"/><div><p className="font-semibold text-red-800">⚠️ Submission Error</p><p className="text-sm text-red-700">Unable to submit to Google Sheets. Please download the CSV below and email it to your instructor.</p></div></div>}<div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6"><div className="flex items-start"><AlertTriangle className="text-yellow-600 mr-3 flex-shrink-0"/><div><h3 className="font-semibold text-yellow-800 mb-2">📥 IMPORTANT: Download Your CSV File</h3><p className="text-sm text-yellow-700 mb-2">Always download and keep your CSV file as backup proof of submission.</p><ul className="text-sm text-yellow-700 space-y-1"><li>✓ Click the download button below</li><li>✓ Save the CSV file safely on your device</li><li>✓ This serves as your proof of completion</li></ul></div></div></div><div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white mb-8"><h2 className="text-2xl font-bold mb-4">Auto-Graded Results</h2><p className="text-sm opacity-90 mb-4">Multiple-choice questions only (Essay & code questions pending review)</p><div className="grid grid-cols-3 gap-4 text-center"><div><div className="text-3xl font-bold">{results.overall.percentage}%</div><div className="text-sm opacity-90">Score</div></div><div><div className="text-3xl font-bold">{results.overall.earnedPoints}/{results.overall.totalPoints}</div><div className="text-sm opacity-90">Points</div></div><div><div className="text-3xl font-bold">{results.overall.passed?'PASSED':'REVIEW'}</div><div className="text-sm opacity-90">Status</div></div></div></div><div className="mb-8"><h2 className="text-2xl font-bold text-gray-900 mb-4">Section Breakdown</h2><div className="space-y-4">{results.sections.map((sec,i)=><div key={i} className={`border-l-4 p-4 rounded-r-lg ${sec.status==='PENDING REVIEW'?'border-yellow-500 bg-yellow-50':sec.passed?'border-green-500 bg-green-50':'border-red-500 bg-red-50'}`}><div className="flex justify-between items-start mb-2"><div><h3 className="font-semibold text-lg text-gray-900">{sec.name}</h3>{sec.status!=='PENDING REVIEW'&&<p className="text-sm text-gray-600">Pass requirement: {sec.passPoints} points</p>}{sec.status==='PENDING REVIEW'&&sec.earnedPoints>0&&<p className="text-sm text-gray-600">Multiple-choice: {sec.earnedPoints} points (Code/essay pending)</p>}</div><div className={`px-3 py-1 rounded-full text-sm font-semibold ${sec.status==='PENDING REVIEW'?'bg-yellow-200 text-yellow-800':sec.passed?'bg-green-200 text-green-800':'bg-red-200 text-red-800'}`}>{sec.status}</div></div>{sec.status!=='PENDING REVIEW'?<div className="flex justify-between items-center"><div className="text-2xl font-bold text-gray-900">{sec.earnedPoints}/{sec.totalPoints} points</div><div className="text-xl font-semibold text-gray-700">{sec.percentage}%</div></div>:sec.earnedPoints>0?<div className="flex justify-between items-center"><div className="text-2xl font-bold text-gray-900">{sec.earnedPoints} points (auto-graded only)</div><div className="text-xl font-semibold text-yellow-700">{sec.percentage}% (partial)</div></div>:<div className="text-gray-600 italic">Manual review required for all questions</div>}</div>)}</div></div><div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6"><h3 className="font-semibold text-blue-900 mb-3">📋 What Happens Next?</h3><ul className="text-blue-800 text-sm space-y-2"><li>✓ Multiple-choice questions have been auto-graded</li><li>✓ {submitStatus==='success'?'Results automatically sent to instructor via Google Sheets':'Please download CSV and share with instructor'}</li><li>✓ Code and essay questions are marked as "PENDING REVIEW"</li><li>✓ Instructor will manually review and grade all written responses</li><li>✓ Final grades will be shared within 3-5 business days</li><li>✓ Keep your downloaded CSV as proof of submission</li></ul></div><button onClick={downloadCSV} className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"><Download/>Download My Responses (CSV) - REQUIRED</button></div></div></div>);
             }
 
-            const filteredSections = getFilteredSections();
-            const section = filteredSections[currentSection];
-            const question = section.questions[currentQuestion];
-            const progress = getProgress();
-
-            return (
-                <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100" style={{ userSelect: 'none' }}>
-                    <div className="bg-white shadow-lg sticky top-0 z-10">
-                        <div className="max-w-5xl mx-auto px-6 py-4">
-                            <div className="flex justify-between items-center">
-                                <div>
-                                    <h1 className="text-2xl font-bold text-gray-900">Technical Assessment</h1>
-                                    <p className="text-sm text-gray-600">{studentInfo.name} - {studentInfo.track.toUpperCase()}</p>
-                                </div>
-                                <div className="flex items-center gap-6">
-                                    <div className="text-right">
-                                        <div className="text-sm text-gray-600">Time Remaining</div>
-                                        <div className={`text-2xl font-bold ${timeRemaining < 600 ? 'text-red-600' : 'text-gray-900'} flex items-center gap-2`}>
-                                            <Clock />
-                                            {formatTime(timeRemaining)}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="mt-4">
-                                <div className="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>Question {getCurrentQuestionNumber()} of {getTotalQuestions()}</span>
-                                    <span>{Math.round(progress)}% Complete</span>
-                                </div>
-                                <div className="w-full bg-gray-200 rounded-full h-3">
-                                    <div className="bg-blue-600 h-3 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="max-w-4xl mx-auto p-6">
-                        <div className="bg-white rounded-2xl shadow-xl p-8">
-                            <div className="mb-6">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">{section.name}</div>
-                                    {question.points > 0 && (
-                                        <div className="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">{question.points} points</div>
-                                    )}
-                                    {question.points === 0 && (
-                                        <div className="inline-block bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold">Manual Review</div>
-                                    )}
-                                </div>
-                                <h2 className="text-2xl font-bold text-gray-900 mb-2">Question {getCurrentQuestionNumber()}</h2>
-                            </div>
-
-                            <div className="mb-8">
-                                <p className="text-lg text-gray-800 leading-relaxed whitespace-pre-line">{question.question}</p>
-                            </div>
-
-                            {question.type === 'multiple' ? (
-                                <div className="space-y-3">
-                                    {question.options.map((option, idx) => (
-                                        <label key={idx} className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                                            answers[question.id] === idx ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
-                                        }`}>
-                                            <input type="radio" name={question.id} checked={answers[question.id] === idx}
-                                                onChange={() => handleAnswerChange(question.id, idx)} className="w-5 h-5 text-blue-600" />
-                                            <span className="ml-3 text-gray-900">{option}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            ) : question.type === 'code' ? (
-                                <div>
-                                    <div className="bg-gray-800 rounded-lg p-1 mb-2">
-                                        <div className="flex justify-between items-center px-3 py-2 bg-gray-700 rounded-t">
-                                            <span className="text-sm font-semibold text-gray-200">Code Editor</span>
-                                            <span className="text-xs text-gray-400">Edit the code directly below</span>
-                                        </div>
-                                    </div>
-                                    <textarea value={answers[question.id] || question.baseCode} onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                                        className="w-full h-96 p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none font-mono text-sm bg-gray-50"
-                                        placeholder="Edit the code here..." spellCheck={false} />
-                                    <p className="text-sm text-gray-600 mt-2">💡 Tip: The base code is pre-filled. Complete the missing parts marked with comments.</p>
-                                </div>
-                            ) : (
-                                <textarea value={answers[question.id] || ''} onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                                    className="w-full h-64 p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                                    placeholder="Type your answer here..." />
-                            )}
-
-                            <div className="flex justify-between items-center mt-8 pt-6 border-t">
-                                <button onClick={goToPrevQuestion} disabled={currentSection === 0 && currentQuestion === 0}
-                                    className="flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                                    <ChevronLeft />
-                                    Previous
-                                </button>
-
-                                {isLastQuestion() ? (
-                                    <button onClick={handleSubmit}
-                                        className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors">
-                                        Submit Assessment
-                                    </button>
-                                ) : (
-                                    <button onClick={goToNextQuestion}
-                                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                                        Next
-                                        <ChevronRight />
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="mt-6 bg-white rounded-lg shadow p-4">
-                            <div className="flex justify-between items-center">
-                                <span className="text-sm font-medium text-gray-700">Section Progress: Question {currentQuestion + 1} of {section.questions.length}</span>
-                                <span className="text-sm text-gray-600">{section.questions.filter(q => answers[q.id] !== undefined).length} answered</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
+            const fSec = getFilteredSections(); const sec = fSec[currentSection]; const q = sec.questions[currentQuestion]; const prog = getProgress();
+            return (<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100" style={{userSelect:'none'}}><div className="bg-white shadow-lg sticky top-0 z-10"><div className="max-w-5xl mx-auto px-6 py-4"><div className="flex justify-between items-center"><div><h1 className="text-2xl font-bold text-gray-900">Technical Assessment</h1><p className="text-sm text-gray-600">{studentInfo.name} - {studentInfo.track.toUpperCase()}</p></div><div className="flex items-center gap-6"><div className="text-right"><div className="text-sm text-gray-600">Time Remaining</div><div className={`text-2xl font-bold ${timeRemaining<600?'text-red-600':'text-gray-900'} flex items-center gap-2`}><Clock/>{formatTime(timeRemaining)}</div></div></div></div><div className="mt-4"><div className="flex justify-between text-sm text-gray-600 mb-2"><span>Question {getCurrentQuestionNumber()} of {getTotalQuestions()}</span><span>{Math.round(prog)}% Complete</span></div><div className="w-full bg-gray-200 rounded-full h-3"><div className="bg-blue-600 h-3 rounded-full transition-all duration-300" style={{width:`${prog}%`}}/></div></div></div></div><div className="max-w-4xl mx-auto p-6"><div className="bg-white rounded-2xl shadow-xl p-8"><div className="mb-6"><div className="flex items-center gap-3 mb-4"><div className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">{sec.name}</div>{q.points>0&&<div className="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">{q.points} points</div>}{q.points===0&&<div className="inline-block bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold">Manual Review</div>}</div><h2 className="text-2xl font-bold text-gray-900 mb-2">Question {getCurrentQuestionNumber()}</h2></div><div className="mb-8"><p className="text-lg text-gray-800 leading-relaxed whitespace-pre-line">{q.question}</p></div>{q.type==='multiple'?<div className="space-y-3">{q.options.map((opt,i)=><label key={i} className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${answers[q.id]===i?'border-blue-600 bg-blue-50':'border-gray-200 hover:border-blue-300'}`}><input type="radio" name={q.id} checked={answers[q.id]===i} onChange={()=>handleAnswerChange(q.id,i)} className="w-5 h-5 text-blue-600"/><span className="ml-3 text-gray-900">{opt}</span></label>)}</div>:q.type==='code'?<div><div className="bg-gray-800 rounded-lg p-1 mb-2"><div className="flex justify-between items-center px-3 py-2 bg-gray-700 rounded-t"><span className="text-sm font-semibold text-gray-200">Code Editor</span><span className="text-xs text-gray-400">Edit the code directly below</span></div></div><textarea value={answers[q.id]||q.baseCode} onChange={(e)=>handleAnswerChange(q.id,e.target.value)} className="w-full h-96 p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none font-mono text-sm bg-gray-50" placeholder="Edit the code here..." spellCheck={false}/><p className="text-sm text-gray-600 mt-2">💡 Tip: The base code is pre-filled. Complete the missing parts marked with comments.</p></div>:<textarea value={answers[q.id]||''} onChange={(e)=>handleAnswerChange(q.id,e.target.value)} className="w-full h-64 p-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Type your answer here..."/>}<div className="flex justify-between items-center mt-8 pt-6 border-t"><button onClick={goToPrevQuestion} disabled={currentSection===0&&currentQuestion===0} className="flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"><ChevronLeft/>Previous</button>{isLastQuestion()?<button onClick={handleSubmit} className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors">Submit Assessment</button>:<button onClick={goToNextQuestion} className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">Next<ChevronRight/></button>}</div></div><div className="mt-6 bg-white rounded-lg shadow p-4"><div className="flex justify-between items-center"><span className="text-sm font-medium text-gray-700">Section Progress: Question {currentQuestion+1} of {sec.questions.length}</span><span className="text-sm text-gray-600">{sec.questions.filter(q=>answers[q.id]!==undefined).length} answered</span></div></div></div></div>);
         }
 
         ReactDOM.render(<AssessmentPlatform />, document.getElementById('root'));
