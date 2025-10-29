@@ -257,7 +257,7 @@
                 csv += `Name,${studentInfo.name}\nEmail,${studentInfo.email}\nTrack,${studentInfo.track.toUpperCase()}\nSubmission Date,${new Date().toLocaleString()}\n\n`;
                 csv += 'SECTION RESULTS\nSection,Points Earned,Total Points,Pass Points,Percentage,Status\n';
                 results.sections.forEach(s => { csv += `${s.name},${s.earnedPoints},${s.totalPoints},${s.passPoints},${s.percentage}%,${s.status}\n`; });
-                csv += '\nOVERALL RESULTS\nTotal Points Earned,${results.overall.earnedPoints}\nTotal Possible Points,${results.overall.totalPoints}\nOverall Percentage,${results.overall.percentage}%\nOverall Status,${results.overall.passed ? 'PASSED' : 'NEEDS REVIEW'}\n\n';
+                csv += `\nOVERALL RESULTS\nTotal Points Earned,${results.overall.earnedPoints}\nTotal Possible Points,${results.overall.totalPoints}\nOverall Percentage,${results.overall.percentage}%\nOverall Status,${results.overall.passed ? 'PASSED' : 'NEEDS REVIEW'}\n\n`;
                 csv += 'DETAILED ANSWERS\nQuestion ID,Question,Answer,Points\n';
                 getFilteredSections().forEach(section => {
                     section.questions.forEach(q => {
