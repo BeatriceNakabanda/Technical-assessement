@@ -119,6 +119,21 @@
                     ]
                 },
                 {
+                    name: "Git & GitHub",
+                    totalPoints: 30,
+                    passPoints: 21,
+                    hasObjective: true,
+                    questions: [
+                        { id: "git_1", type: "multiple", points: 2, question: "What does 'git clone' do?", options: ["Creates a new empty repository", "Copies a remote repository to your local machine", "Merges two branches", "Deletes a remote repository"], correct: 1 },
+                        { id: "git_2", type: "multiple", points: 2, question: "Which command stages all changed files for a commit?", options: ["git commit -a", "git push --all", "git add .", "git stage --all"], correct: 2 },
+                        { id: "git_3", type: "multiple", points: 2, question: "What is a Pull Request (PR)?", options: ["Downloading code from a server", "A request to merge changes from one branch into another", "Pulling the latest commits to your local machine", "A request to delete a branch"], correct: 1 },
+                        { id: "git_4", type: "multiple", points: 2, question: "What does 'git stash' do?", options: ["Permanently deletes uncommitted changes", "Saves uncommitted changes temporarily so you can switch branches", "Pushes changes directly to the remote branch", "Creates a new branch from your current changes"], correct: 1 },
+                        { id: "git_5", type: "multiple", points: 2, question: "What is the difference between 'git merge' and 'git rebase'?", options: ["They are identical — both combine branch histories", "Merge creates a new merge commit; rebase rewrites commit history onto another branch", "Rebase is only used for deleting branches", "Merge rewrites history; rebase keeps history intact"], correct: 1 },
+                        { id: "git_essay_1", type: "essay", points: 10, question: "Describe your personal Git workflow when working on a new feature. Walk through the steps you take from starting work to getting your code merged — including branching, committing, and collaboration with teammates." },
+                        { id: "git_essay_2", type: "essay", points: 10, question: "You run 'git pull' and get a merge conflict. Explain what a merge conflict is, why it happens, and walk through the steps you would take to resolve it." }
+                    ]
+                },
+                {
                     name: "Python Fundamentals",
                     totalPoints: 70,
                     passPoints: 49,
@@ -221,7 +236,6 @@
                     return { name: section.name, earnedPoints, totalPoints: section.totalPoints, passPoints: section.passPoints, passed, percentage: Math.round((earnedPoints / section.totalPoints) * 100), status: passed ? 'PASSED' : 'FAILED' };
                 });
 
-                // Calculate overall from sections that have objective questions (even if pending review)
                 const objSections = sectionResults.filter(s => s.totalPoints > 0);
                 const totalEarned = objSections.reduce((sum, r) => sum + r.earnedPoints, 0);
                 const totalPoints = objSections.reduce((sum, r) => sum + r.totalPoints, 0);
@@ -456,7 +470,7 @@
                                                             <p className="text-sm text-gray-600">Pass requirement: {section.passPoints} points</p>
                                                         )}
                                                         {section.status === 'PENDING REVIEW' && section.earnedPoints > 0 && (
-                                                            <p className="text-sm text-gray-600">Multiple-choice: {section.earnedPoints} points (Code/essay pending)</p>
+                                                            <p className="text-sm text-gray-600">Multiple-choice: {section.earnedPoints} points (Open-ended pending)</p>
                                                         )}
                                                     </div>
                                                     <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
